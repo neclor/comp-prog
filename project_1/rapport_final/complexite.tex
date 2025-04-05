@@ -6,16 +6,26 @@
 \section{Complexité}\label{complexite}
 %%%%%%%%%%%%%%%%%%%%
 
-\begin{itemize}
-    \item \textbf{SP2-pref\_equal\_suff}:
-        Pire cas: $O(k)$ opérations et dans le pire cas, $k = N-1$: $O(N)$
+\textbf{Complexité:}
 
-    \item \textbf{SP1-prefixe\_suffixe}:
-        Pire cas: tableau avec $k=1$ comme solution ou aucune solution donc
-        la complexité de l'énumération est $O(k)$ et $k \in [N-1..1]$: $O(N)$
-        et nous appelons $pref\_equal\_suff$ pour chaque $k$.
-        Complexité totale:
-        $\sum_{k=1}^{N-1} O(N) = O(N^2)$
+\begin{itemize}
+    \item Complexité de la fonction \texttt{pref\_equal\_suff}:
+        \begin{itemize}
+            \item Dans le pire cas, la fonction effectue $k$ comparaisons
+            \item Dans cas maximal ($k = N-1$), la complexité est $\mathcal{O}(N)$
+        \end{itemize}
+
+    \item Complexité de la fonction \texttt{prefixe\_suffixe}:
+        \begin{itemize}
+            \item Dans le pire cas, itère sur toutes les valeurs de $k$ de $N-1$ à $1$
+            \item Appelle \texttt{pref\_equal\_suff} pour chaque $k$
+        \end{itemize}
 
 \end{itemize}
 
+\bigskip
+
+\textbf{Complexité totale:}
+    \begin{itemize}
+        \item $\sum_{k=1}^{N-1} \mathcal{O}(k) = \mathcal{O}(N^2)$
+    \end{itemize}

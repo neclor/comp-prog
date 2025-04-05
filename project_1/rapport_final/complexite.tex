@@ -5,3 +5,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Complexité}\label{complexite}
 %%%%%%%%%%%%%%%%%%%%
+
+\begin{itemize}
+    \item \textbf{SP2-pref\_equal\_suff}:
+        Pire cas: $O(k)$ opérations et dans le pire cas, $k = N-1$: $O(N)$
+
+    \item \textbf{SP1-prefixe\_suffixe}:
+        Pire cas: tableau avec $k=1$ comme solution ou aucune solution donc
+        la complexité de l'énumération est $O(k)$ et $k \in [N-1..1]$: $O(N)$
+        et nous appelons $pref\_equal\_suff$ pour chaque $k$.
+        Complexité totale:
+        $\sum_{k=1}^{N-1} O(N) = O(N^2)$
+
+\end{itemize}
+

@@ -6,24 +6,4 @@
 \section{Formalisation du Problème}\label{formalisation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Utilisez les bons opérateurs}
-
-Voir la table \ref{table:op}.
-
-\begin{table}[!h]
-\centering
-\begin{tabular}{l c}
-Nom & Op \\
-\hline
-ET & $\land$ \\
-OU & $\lor$ \\
-Quantification universelle & $\forall$ \\
-Quantification existentielle & $\exists$ \\
-\end{tabular}
-\caption{Opérateurs les plus usuels en logique}
-\label{table:op}
-\end{table}
-
-\subsection{Trouver un symbole précis}
-
-Voir ce site : \url{http://detexify.kirelabs.org/classify.html}. Il suffit de dessiner le symbole dont vous avez besoin et le site trouvera (normalement) la bonne commande à taper (ainsi que le package à éventuellement inclure si besoin est).
+$\operatorname{prefixe\_suffixe}(T, N) \equiv \max\{k \mid k \in 0 \dots N-1 \land \forall i \cdot (i \in 0 \dots k - 1 \Rightarrow T[i] = T[N-k+i])\}$

@@ -27,8 +27,6 @@ static int pref_equal_suff(int *T, const unsigned int N, unsigned int k);
  * Sp 1
  * Checking all prefixes starting from the longest one until we find a match
  * or exhaust all possibilities.
- *
- * Сomplexity: O(n^2)
  */
 int prefixe_suffixe(int *T, const unsigned int N) {
    assert((T != NULL) && (0 < N));
@@ -42,8 +40,6 @@ int prefixe_suffixe(int *T, const unsigned int N) {
 /**
  * Sp 2
  * Comparing the prefix and suffix of the given length, element by element.
- *
- * Сomplexity: O(n)
  */
 static int pref_equal_suff(int *T, const unsigned int N, const unsigned int k) {
    assert((T != NULL) && (0 < N) && (0 < k && k < N));
@@ -53,6 +49,3 @@ static int pref_equal_suff(int *T, const unsigned int N, const unsigned int k) {
    }
    return 1;
 }
-
-// gcc code/main-prefixe_suffixe.c code/prefixe_suffixe.c
-// ./a.out

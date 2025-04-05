@@ -11,7 +11,7 @@
 #define _PREFIXE_SUFFIXE_H
 
 /**
- * Сalculating the length of the longest subarray at the prefix and suffix.
+ * Сalсulating the length of the longest subarray at the prefix and suffix.
  *
  * Сomplexity: O(n^2)
  *

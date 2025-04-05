@@ -21,7 +21,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[T2A]{fontenc} 
+\usepackage[T2A]{fontenc}
 \usepackage[french]{babel}
 \usepackage{array}
 \usepackage{shortvrb}
@@ -42,7 +42,7 @@
 
 
 %%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
-\newcommand{\intitule}{Milestone 1}
+\newcommand{\intitule}{Milestone 2}
 \newcommand{\GrNbr}{33}
 \newcommand{\PrenomUN}{Pavlov}
 \newcommand{\NomUN}{Aleksandr}
@@ -62,17 +62,54 @@
 
 
 %%%%%%%%%%%%%%%% MILESTONE %%%%%%%%%%%%%%%
-\section{Production}
+\section{Invariants}
 %%%%%%%%%%%%%%%%%%%%%
 
-\[
-N \geq 0 \land \forall i \cdot (i \in 0 \dots N-1 \Rightarrow T[i] \in \mathbb{Z})
-\]
-\[
-\operatorname{prefixe\_suffixe}(T, N) \equiv \max\{k \mid k \in 0 \dots N-1 \land \forall i \cdot (i \in 0 \dots k - 1 \Rightarrow T[i] = T[N-k+i])\}
-\]
+\subsection{Invariant 1}
 
-\section{Question(s)}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{inv1.png}
+    \caption{Invariant Graphique 1}
+\end{figure}
+
+\textbf{Invariant Formel:}
+
+\[ 0 < k < N \]
+
+\subsection{Invariant 2}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{invariant_T_2.png}
+    \caption{Invariant Graphique 2}
+\end{figure}
+
+\textbf{Invariant Formel:}
+
+\[ T = T_0 \land k = k_0 \]
+\[ \land \]
+\[ 0 \leq i < k \]
+
+
+
+
+
+% \[ \land \]
+% \[ T[i] = T[N - k + i] \]
+
+% \[
+% N \geq 0 \land \forall i \cdot (i \in 0 \dots N-1 \Rightarrow T[i] \in \mathbb{Z})
+% \]
+% \[
+% \operatorname{prefixe\_suffixe}(T, N) \equiv \max\{k \mid k \in 0 \dots N-1 \land \forall i \cdot (i \in 0 \dots k - 1 \Rightarrow T[i] = T[N-k+i])\}
+% \]
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

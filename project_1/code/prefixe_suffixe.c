@@ -31,8 +31,10 @@ static int pref_equal_suff(int *T, const unsigned int N, unsigned int k);
 int prefixe_suffixe(int *T, const unsigned int N) {
    assert((T != NULL) && (0 < N));
 
-   for (unsigned int k = N - 1; k > 0; k--) {
+   unsigned int k = N - 1;
+   while (k > 0) {
       if (pref_equal_suff(T, N, k)) return k;
+      k--;
    }
    return 0;
 }
@@ -44,8 +46,10 @@ int prefixe_suffixe(int *T, const unsigned int N) {
 static int pref_equal_suff(int *T, const unsigned int N, const unsigned int k) {
    assert((T != NULL) && (0 < N) && (0 < k && k < N));
 
-   for (unsigned int i = 0; i <= k - 1; i++) {
+   unsigned int i = 0;
+   while (i <= k - 1) {
       if (T[i] != T[N - k + i]) return 0;
+      i++;
    }
    return 1;
 }

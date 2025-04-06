@@ -14,7 +14,50 @@
 \section{Approche Constructive}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{lstlisting}[caption={Un programme tout simple}]
+\begin{lstlisting}[caption={SP1}]
+int prefixe_suffixe(int *T, const unsigned int N) {
+    // {}
+    unsigned int k = N - 1;
+    // {$k = N - 1$}
+    while (k > 0) {
+        // {$0 < k < N$}
+        if (pref_equal_suff(T, N, k)) return k;
+        // {$T[0..k-1] \neq T[N-k..N-1]$}
+        k--;
+        // {$k = k - 1$}
+    }
+    // {$k = 0$}
+    return 0;
+    // {$T = T_0 \land N = N_0$}
+}
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[caption={SP2}]
+    int prefixe_suffixe(int *T, const unsigned int N) {
+
+
+
+
+        unsigned int k = N - 1;
+
+
+
+
+
+
+        while (k > 0) {
+            if (pref_equal_suff(T, N, k)) return k;
+            k--;
+        }
+        return 0;
+    }
+\end{lstlisting}
+
+
+\begin{lstlisting}[caption={AAAA}]
 int main(void)
 {
     // Les commandes Latex sont permises dans les commentaires sur une ligne. Exemple : $x_i \leq a ^b$

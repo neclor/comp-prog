@@ -11,7 +11,7 @@
 #define N5 5
 
 
-int main(){
+int main(void) {
    // const unsigned int N1 = 9;
    // const unsigned int N2 = 10;
    // const unsigned int N3 = 9;

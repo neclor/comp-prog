@@ -26,6 +26,7 @@ int main(){
    printf("Length longest prefix/suffix of T1: %u\n", prefixe_suffixe(T1, N1)); // 4
    printf("Length longest prefix/suffix of T2: %u\n", prefixe_suffixe(T2, N2)); // 5
    printf("Length longest prefix/suffix of T3: %u\n", prefixe_suffixe(T3, N3)); // 0
+
    printf("\n");
    printf("Length longest prefix/suffix of T4: %u\n", prefixe_suffixe(T4, N4)); // 6
    printf("Length longest prefix/suffix of T5: %u\n", prefixe_suffixe(T5, N5)); // 4

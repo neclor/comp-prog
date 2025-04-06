@@ -5,20 +5,6 @@
 
 // ===== Prototypes =====
 
-/**
- * Checking if a prefix of length k is equal to the suffix.
- *
- * @param T: input array.
- * @param N: length of array T.
- * @param k: length of prefix and suffix.
- *
- * @pre: T != NULL, 0 < N, 0 < k < N
- * @post: T = T_0, N = N_0, k = k_0
- *
- * @return:
- *     0 Prefix and suffix are NOT equal
- *     1 Prefix and suffix are equal
- */
 static int pref_equal_suff(int *T, const unsigned int N, unsigned int k);
 
 // ===== Code =====

@@ -69,9 +69,9 @@
 % contreproductive.                                                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textbf{Compréhension du problème:} \\
-décrivant votre compréhension du problème et vos axiome ???
-
+En gros il faut crée une course a vélo,
+une course est composé de plusieurs étapes(qui sont représenter par des coordonées)
+on peut donc en déduire la distence entre deux viles (ou étapes)
 
 \subsection{Escale}
 
@@ -82,29 +82,29 @@ décrivant votre compréhension du problème et vos axiome ???
 
 \textbf{Utilise:}
 \begin{itemize}
-    \item[] Reel (or float or double jsp ??), String
+    \item[] Float, String
 \end{itemize}
 
 \textbf{Opérations:}
 \begin{itemize}
-    \item[] create: String $\times$ Reel $\times$ Reel $\to$ Escale
+    \item[] create: String $\times$ Float $\times$ Float $\to$ Escale
     \item[] getName: Escale $\to$ String
-    \item[] getX: Escale $\to$ Reel
-    \item[] getY: Escale $\to$ Reel
-    \item[] distance: Escale $\times$ Escale $\to$ Reel
-    \item[] setBestTime: Escale $\times$ Reel $\to$ Escale
-    \item[] getBestTime: Escale $\to$ Reel
+    \item[] getX: Escale $\to$ Float
+    \item[] getY: Escale $\to$ Float
+    \item[] distance: Escale $\times$ Escale $\to$ Float
+    \item[] setBestTime: Escale $\times$ Float $\to$ Escale
+    \item[] getBestTime: Escale $\to$ Float
 \end{itemize}
 
 \textbf{Préconditions:}
 \begin{itemize}
-    \item[] $\forall e1 \in \text{Escale}, \forall t \in \text{Reel}$
+    \item[] $\forall e1 \in \text{Escale}, \forall t \in \text{Float}$
     \item[] $\forall t, t \geq 0$, setBestTime(e1, t)
 \end{itemize}
 
 \textbf{Axiomes:}
 \begin{itemize}
-    \item[] $\forall e1, e2 \in \text{Escale}, \forall x, y \in \text{Reel}, \forall n \in \text{String}, \forall t \in \text{Reel}_{>0}$
+    \item[] $\forall e1, e2 \in \text{Escale}, \forall x, y \in \text{Float}, \forall n \in \text{String}, \forall t \in \text{Float}_{\geq0}$
     \item[] getX(create(n, x, y)) = x
     \item[] getY(create(n, x, y)) = y
     \item[] getName(create(n, x, y)) = n
@@ -121,17 +121,17 @@ décrivant votre compréhension du problème et vos axiome ???
 
 \textbf{Utilise:}
 \begin{itemize}
-    \item[] Escale, Naturel (or integer jsp ??), Reel(or float or double jsp ??), Boolean
+    \item[] Escale, Integer, Float, Boolean
 \end{itemize}
 
 \textbf{Opérations:}
 \begin{itemize}
     \item[] create: Escale $\times$ Escale $\to$ Course
     \item[] isCircle: Course $\to$ Boolean
-    \item[] getEscalesNumber: Course $\to$ Naturel
-    \item[] getEtapesNumber: Course $\to$ Naturel
-    \item[] getBestToatalTime: Course $\to$ Reel
-    \item[] getBestTime: Course $\times$ Naturel $\to$ Reel
+    \item[] getEscalesNumber: Course $\to$ Integer
+    \item[] getEtapesNumber: Course $\to$ Integer
+    \item[] getBestToatalTime: Course $\to$ Float
+    \item[] getBestTime: Course $\times$ Integer $\to$ Float
     \item[] add: Course $\times$ Escale $\to$ Course
     \item[] remove: Course $\to$ Course
 \end{itemize}
@@ -144,9 +144,9 @@ décrivant votre compréhension du problème et vos axiome ???
 
 \textbf{Axiomes:}
 \begin{itemize}
-    \item[] $\forall c \in \text{Course}, \forall e1, e2 \in \text{Escale}, \forall i \in \text{Naturel}, \forall t \in \text{Reel}_{>0}$
+    \item[] $\forall c \in \text{Course}, \forall e1, e2 \in \text{Escale}, \forall i \in \text{Integer}, \forall t \in \text{Float}_{\geq0}$
     \item[] isCircle(create(e1, e2)) = False
-    \item[] isCircle(add(create(e1, e2), c1)) = True
+    \item[] isCircle(add(create(e1, e2), e1)) = True
     \item[]
     \item[] getEscalesNumber(create(e1, e2)) = 2
     \item[] getEscalesNumber(add(c, e1)) = getEscalesNumber(c) + 1

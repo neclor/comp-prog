@@ -1,0 +1,178 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ceci est le template à utiliser pour les milestones des projets d'INFO0947.            %
+%                                                                                        %
+% Vous devez décommenter et compléter les commandes introduites plus bas (intitule, ...) %
+% avant de pouvoir compiler le fichier LaTeX.                                            %
+%                                                                                        %
+% Le PDF produit doit avoir la forme suivante: grpID_ProjetX_MilestoneY.pdf              %
+% où:                                                                                    %
+%   - grpID est votre identifiant de groupe (cfr. eCampus)                               %
+%   - X est le numéro du projet (1 pour Construction, 2 pour TAD)                        %
+%   - Y est le numéro du milestone (1 ou 2)                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% !TEX root = ./main.tex
+% !TEX engine = latexmk -pdf
+% !TEX buildOnSave = true
+\documentclass[a4paper, 11pt, oneside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{array}
+\usepackage{shortvrb}
+\usepackage{listings}
+\usepackage[fleqn]{amsmath}
+\usepackage{amsfonts}
+\usepackage{fullpage}
+\usepackage{enumerate}
+\usepackage{graphicx}             % import, scale, and rotate graphics
+\usepackage{subfigure}            % group figures
+\usepackage{alltt}
+\usepackage{url}
+\usepackage{indentfirst}
+\usepackage{eurosym}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[table,xcdraw,dvipsnames]{xcolor}
+
+%%%%%%%%%%%%%%%%% TITRE %%%%%%%%%%%%%%%%
+% Complétez et décommentez les définitions de macros suivantes :
+\newcommand{\intitule}{Milestone 1}
+\newcommand{\GrNbr}{33}
+\newcommand{\PrenomUN}{Pavlov}
+\newcommand{\NomUN}{Aleksandr}
+\newcommand{\PrenomDEUX}{Gendebien}
+\newcommand{\NomDEUX}{Alexandre}
+
+%%%%%%%% ZONE PROTÉGÉE : MODIFIEZ UNE DES DIX PROCHAINES %%%%%%%%
+%%%%%%%%            LIGNES POUR PERDRE 2 PTS.            %%%%%%%%
+\title{INFO0947: \intitule}
+\author{Groupe \GrNbr : \PrenomUN~\textsc{\NomUN}, \PrenomDEUX~\textsc{\NomDEUX}}
+\date{}
+\begin{document}
+
+\maketitle
+%%%%%%%%%%%%%%%%%%%% FIN DE LA ZONE PROTÉGÉE %%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%% MILESTONE %%%%%%%%%%%%%%%
+% Écrivez le contenu de votre milestone ci-dessous.
+
+\section{Production}
+%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dans cette section, vous rédigez la production demandée pour le milestone.             %
+%                                                                                        %
+% Soyez le plus précis et complet possible.  Toute production ne correspondant pas à ce  %
+% qui est demandé sera considérée comme ``hors sujet'' et la séance de feedback sera     %
+% contreproductive.                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Compréhension du problème:} \\
+décrivant votre compréhension du problème et vos axiome ???
+
+
+\subsection{Escale}
+
+\textbf{Type:}
+\begin{itemize}
+    \item[] Escale
+\end{itemize}
+
+\textbf{Utilise:}
+\begin{itemize}
+    \item[] Reel (or float or double jsp ??), String
+\end{itemize}
+
+\textbf{Opérations:}
+\begin{itemize}
+    \item[] create: String $\times$ Reel $\times$ Reel $\to$ Escale
+    \item[] getName: Escale $\to$ String
+    \item[] getX: Escale $\to$ Reel
+    \item[] getY: Escale $\to$ Reel
+    \item[] distance: Escale $\times$ Escale $\to$ Reel
+    \item[] setBestTime: Escale $\times$ Reel $\to$ Escale
+    \item[] getBestTime: Escale $\to$ Reel
+\end{itemize}
+
+\textbf{Préconditions:}
+\begin{itemize}
+    \item[] $\forall e1 \in \text{Escale}, \forall t \in \text{Reel}$
+    \item[] $\forall t, t \geq 0$, setBestTime(e1, t)
+\end{itemize}
+
+\textbf{Axiomes:}
+\begin{itemize}
+    \item[] $\forall e1, e2 \in \text{Escale}, \forall x, y \in \text{Reel}, \forall n \in \text{String}, \forall t \in \text{Reel}_{>0}$
+    \item[] getX(create(n, x, y)) = x
+    \item[] getY(create(n, x, y)) = y
+    \item[] getName(create(n, x, y)) = n
+    \item[] distance(e1, e2) = $\sqrt{(getX(e2) - getX(e1))^2 + (getY(e2) - getY(e1))^2}$
+    \item[] getBestTime(setBestTime(e1, t)) = t
+\end{itemize}
+
+\subsection{Course}
+
+\textbf{Type:}
+\begin{itemize}
+    \item[] Course
+\end{itemize}
+
+\textbf{Utilise:}
+\begin{itemize}
+    \item[] Escale, Naturel (or integer jsp ??), Reel(or float or double jsp ??), Boolean
+\end{itemize}
+
+\textbf{Opérations:}
+\begin{itemize}
+    \item[] create: Escale $\times$ Escale $\to$ Course
+    \item[] isCircle: Course $\to$ Boolean
+    \item[] getEscalesNumber: Course $\to$ Naturel
+    \item[] getEtapesNumber: Course $\to$ Naturel
+    \item[] getBestToatalTime: Course $\to$ Reel
+    \item[] getBestTime: Course $\times$ Naturel $\to$ Reel
+    \item[] add: Course $\times$ Escale $\to$ Course
+    \item[] remove: Course $\to$ Course
+\end{itemize}
+
+\textbf{Préconditions:}
+\begin{itemize}
+    \item[] $\forall e1, e2 \in \text{Escale}$
+    \item[] $\forall e1, e2, e1 \neq e2 \land getBestTime(e1) = 0$, create(e1, e2)
+\end{itemize}
+
+\textbf{Axiomes:}
+\begin{itemize}
+    \item[] $\forall c \in \text{Course}, \forall e1, e2 \in \text{Escale}, \forall i \in \text{Naturel}, \forall t \in \text{Reel}_{>0}$
+    \item[] isCircle(create(e1, e2)) = False
+    \item[] isCircle(add(create(e1, e2), c1)) = True
+    \item[]
+    \item[] getEscalesNumber(create(e1, e2)) = 2
+    \item[] getEscalesNumber(add(c, e1)) = getEscalesNumber(c) + 1
+    \item[]
+    \item[] getEtapesNumber(create(e1, e2)) = 1
+    \item[] getEtapesNumber(add(c, e1)) = getEtapesNumber(c) + 1
+    \item[]
+    \item[] getBestTotalTime(create(e1, e2)) = getBestTime(e1) + getBestTime(e2)
+    \item[] getBestTotalTime(add(c, e1)) = getBestTotalTime(c) + getBestTime(e1)
+    \item[]
+    \item[] getBestTime(create(e1, e2), 0) = getBestTime(e1)
+    \item[] getBestTime(create(e1, e2), 1) = getBestTime(e2)
+    \item[]
+    \item[] remove(add(c, e1)) = c
+\end{itemize}
+
+
+\section{Question(s)}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dans cette section, vous pouvez rédiger les questions que vous avez sur le projet ou   %
+% formuler ce qui reste incompris pour vous.                                             %
+%                                                                                        %
+% Nous en discuterons lors de la rencontre feedback sur votre production pour le         %
+% milestone                                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

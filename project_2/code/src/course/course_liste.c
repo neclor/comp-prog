@@ -4,13 +4,12 @@
 */
 
 #include <assert.h>
+#include <stdlib.h>
+
+#include "bool.h"
+#include "escale.h"
 
 #include "course.h"
-
-/* ======= Constants ======= */
-
-#define INITIAL_SIZE 10
-#define REALLOCATION_FACTOR 2
 
 /* ======= Structures ======= */
 

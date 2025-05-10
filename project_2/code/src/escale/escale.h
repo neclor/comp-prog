@@ -6,6 +6,8 @@
 #ifndef ESCALE_H
 #define ESCALE_H
 
+#include "bool.h"
+
 /* ======= Structures ======= */
 
 typedef struct Escale Escale;
@@ -22,8 +24,10 @@ double escale_get_y(const Escale *escale);
 
 double escale_get_best_time(const Escale *escale);
 
-int escale_set_best_time(Escale *escale, double time);
+void escale_set_best_time(Escale *escale, double time);
 
 double escale_distance(const Escale *e1, const Escale *e2);
+
+bool escale_equal(const Escale *e1, const Escale *e2);
 
 #endif // ESCALE_H

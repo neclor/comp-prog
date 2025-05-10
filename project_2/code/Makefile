@@ -1,51 +1,56 @@
-TARGET = filtre
+# ======= Make ======= #
+
+TARGET =
 
 SRC_DIR	= src
 OBJ_DIR = build
-LIB_DIR	= lib
-
-INC = $(addprefix -I, $(shell find $(SRC_DIR) $(LIB_DIR) -type d))
 
 SRCS = $(shell find $(SRC_DIR) -type f -name "*.c")
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-LIBS = $(LIB_DIR)/pnm/libpnm.a
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+INCS = $(shell find $(SRC_DIR) -type d)
 
-# Tests
-TEST = pnm_tests
-TST_DIR = test
-TST_INC = $(addprefix -I, $(shell find $(TST_DIR) -type d))
-TSTS = $(shell find $(TST_DIR) -type f -name "*.c")
-TST_OBJS = $(TSTS:$(TST_DIR)/%.c=$(TST_DIR)/$(OBJ_DIR)/%.o)
-TST_CFLAGS = --std=c99 $(INC) $(TST_INC)
+I_INC = $(addprefix -I, $(INCS))
 
 CC = gcc
-CFLAGS = --std=c99 --pedantic -Wall -W -Wextra -Wmissing-prototypes $(INC)
+CFLAGS = --std=c99 --pedantic -Wall -W -Wextra -Wmissing-prototypes $(I_INC)
 LD = gcc
 LDFLAGS = -lm
 
-all: $(TARGET)
+# ======= Test ======= #
 
-$(TARGET): $(OBJS) $(LIBS)
+TEST_DIR = test
+
+TESTS = $(shell find $(TEST_DIR) -type f -name "*.c")
+TEST_OBJS = $(TSTS:%.c=$(OBJ_DIR)/%.o)
+TEST_INCS = $(shell find $(TEST_DIR) -type d)
+
+TEST_I_INC = $(addprefix -I, $(TEST_INCS))
+
+TEST_CFLAGS = --std=c99 --pedantic -Wall -W -Wextra -Wmissing-prototypes $(I_INC) $(TEST_I_INC)
+
+# ======= Rules ======= #
+
+all: test_array test_list
+
+$(TARGET): $(OBJS)
 	$(LD) $^ -o $@ $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c $(INCS)
 	@mkdir -p $(dir $@)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
-$(LIB_DIR)/%.a:
-	@make -C $(dir $@)
+# ======= Test Rules ======= #
 
-pnm_librairie: $(LIBS)
+test_array: course_tableau_test
 
-$(TEST): $(TST_OBJS) $(LIBS) $(OBJ_DIR)/filter.o
+test_list: course_liste_test
+
+%_test: $(OBJ_DIR)/$(TST_DIR)/%_test.o $(OBJ_DIR)/$(SRC_DIR)/course/%.o $(OBJ_DIR)/$(SRC_DIR)/escale.o
 	$(LD) $^ -o $@ $(LDFLAGS)
 
-$(TST_DIR)/$(OBJ_DIR)/%.o: $(TST_DIR)/%.c
+$(OBJ_DIR)/$(TST_DIR)/%.o: $(TST_DIR)/%.c $(INCS) $(TEST_INCS)
 	@mkdir -p $(dir $@)
-	$(CC) -c $< -o $@ $(TST_CFLAGS)
-
-pnm_clean:
-	@make -C $(LIB_DIR)/pnm clean
+	$(CC) -c $< -o $@ $(TEST_CFLAGS)
 
 doc:
 	@doxygen Doxyfile
@@ -63,4 +68,4 @@ git:
 tar:
 	@tar -czvf ../tad-groupe33.tar.gz ../code ../rapport
 
-.PHONY: all $(TARGET) $(TEST) pnm_librairie pnm_clean doc clean my_test git tar
+.PHONY: all test_array test_list clean git tar

@@ -10,9 +10,9 @@
 &\text{course\_create}: \text{Escale} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
-&\quad \text{course\_size}(C) = 2 \\
-&\quad \text{course\_at}(C, 0) = e_1 \\
-&\quad \text{course\_at}(C, 1) = e_2
+&\quad \text{taille course à la création}(C) = 2 \\
+&\quad \text{première étape de la course} = e_1 \\
+&\quad \text{deuxième  étape de la course} = e_2
 \end{aligned}
 \]
 
@@ -25,10 +25,10 @@
 &\text{course\_is\_circuit}: \text{Course} \to \mathbb{B} \\
 &\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{result} = (\text{course\_at}(C, 0) = \text{course\_at}(C, \text{course\_size}(C)-1))
+&\text{si } \text{première étape} = \text{dernière étape} \text{return:true} \\
+&\text{sinon return:false} 
 \end{aligned}
 \]
-
 
 
 
@@ -38,7 +38,7 @@
 &\text{course\_get\_escales\_count}: \text{Course} \to \mathbb{N} \\
 &\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{result} = \text{course\_size}(C)
+&\quad \text{return:} \text{course\_size}
 \end{aligned}
 \]
 
@@ -64,7 +64,7 @@
 &\text{course\_total\_time}: \text{Course} \to \mathbb{R} \\
 &\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{result} = \sum_{i=0}^{\text{course\_size}(C)-1} \text{escale\_time}(\text{course\_at}(C, i))
+&\quad \text{return:} = \sum_{i=0}^{\text{course\_size}(C)-1} \text{escale\_time}
 \end{aligned}
 \]
 
@@ -74,7 +74,7 @@
 
 \[
 \begin{aligned}
-&\text{course\_best\_time\_at}: \text{Course} \times \mathbb{N} \to \mathbb{R} \\
+&\text{course\_best\_time}: \text{Course} \times \mathbb{N} \to \mathbb{R} \\
 &\text{pre}: C \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_size}(C) \\
 &\text{post}: \\
 &\quad \text{result} = \text{escale\_time}(\text{course\_at}(C, \text{index}))
@@ -91,8 +91,7 @@
 &\text{pre}: C \neq \text{NULL} \land e \neq \text{NULL} \\
 &\text{post}: \\
 &\quad \text{course\_size}(C') = \text{course\_size}(C) + 1 \\
-&\quad \text{course\_at}(C', \text{course\_size}(C)) = e \\
-&\quad \forall i \in [0, \text{course\_size}(C)-1], \text{course\_at}(C', i) = \text{course\_at}(C, i)
+&\quad \text{course\_last}(C') = e
 \end{aligned}
 \]
 
@@ -105,11 +104,9 @@
 &\text{course\_pop}: \text{Course} \to \text{Course} \\
 &\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
 &\text{post}: \\
-&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1 \\
-&\quad \forall i \in [0, \text{course\_size}(C')-1], \text{course\_at}(C', i) = \text{course\_at}(C, i)
+&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1
 \end{aligned}
 \]
-
 
 
 

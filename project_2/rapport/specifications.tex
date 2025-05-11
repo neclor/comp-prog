@@ -50,23 +50,48 @@
 
 \[
 \begin{aligned}
-&\text{course\_pop}: \text{Course} \to \text{Course} \\
-&\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
+&\text{course\_pop\_list}: \text{Course} \to \text{Course} \\
+&\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1
+&\quad \text{Si } \text{course\_size}(C) = 1, \text{alors } C' = \text{NULL} \text{ et la mémoire est libérée} \\
+&\quad \text{Sinon, } \text{course\_size}(C') = \text{course\_size}(C) - 1 \\
 \end{aligned}
 \]
 
 \[
 \begin{aligned}
-&\text{course\_append}: \text{Course} \times \text{Escale} \to \text{Course} \\
+&\text{course\_pop\_array}: \text{Course} \to \text{Course} \\
+&\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
+&\text{post}: \\
+&\quad \text{La dernière escale de C est supprimée et libérée} \\
+&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1
+\end{aligned}
+\]
+
+
+
+\[
+\begin{aligned}
+&\text{course\_append\_array}: \text{Course} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: C \neq \text{NULL} \land e \neq \text{NULL} \\
 &\text{post}: \\
+&\quad \text{Si } \text{course\_size}(C) = \text{course\_capacity}(C), \text{alors } C \text{ est réalloué dynamiquement} \\
 &\quad \text{course\_size}(C') = \text{course\_size}(C) + 1 \\
 &\quad \text{course\_last}(C') = e
 \end{aligned}
 \]
 
+
+\[
+\begin{aligned}
+&\text{course\_append\_list}: \text{Course} \times \text{Escale} \to \text{Course} \\
+&\text{pre}: e \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{Si } C = \text{NULL}, \text{alors une nouvelle course est créée et contient e} \\
+&\quad \text{Sinon, e est ajoutée à la fin de la liste chaînée} \\
+&\quad \text{course\_size}(C') = \text{course\_size}(C) + 1
+\end{aligned}
+\]
 
 \subsection{Observateur}
 

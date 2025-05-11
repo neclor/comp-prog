@@ -50,10 +50,10 @@
 
 \[
 \begin{aligned}
-&\text{escale\_set\_best\_time}: \text{Escale} \times \mathbb{R} \to \text{Void} \\
-&\text{pre}: e \neq \text{NULL} \\
+&\text{course\_pop}: \text{Course} \to \text{Course} \\
+&\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
 &\text{post}: \\
-&\quad \text{escale\_get\_best\_time}(e) = \text{best\_time}
+&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1
 \end{aligned}
 \]
 

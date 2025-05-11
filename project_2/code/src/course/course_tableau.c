@@ -35,7 +35,7 @@ Course *course_create(Escale *e1, Escale *e2) {
       e1 != NULL &&
       e2 != NULL &&
       escale_get_best_time(e1) == 0 &&
-      escale_equal(e1, e2)
+      !escale_equal(e1, e2)
    );
 
    Escale **escales = malloc(INITIAL_SIZE * sizeof(Escale *));
@@ -99,7 +99,7 @@ double course_best_time_at(const Course *course, size_t index) {
    return escale_get_best_time(course->escales[index]);
 }
 
-Course *course_append(Course *course, const Escale *escale) {
+Course *course_append(Course *course, Escale *escale) {
    assert(course != NULL && escale != NULL);
 
    if (course->escales_count == course->escales_size)
@@ -112,7 +112,7 @@ Course *course_append(Course *course, const Escale *escale) {
 }
 
 Course *course_pop(Course *course) {
-   assert(course != NULL && course->escales_count <= 0);
+   assert(course != NULL && course->escales_count > 0);
 
    free(course->escales[course->escales_count - 1]);
    course->escales_count--;

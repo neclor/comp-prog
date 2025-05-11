@@ -29,7 +29,7 @@ double course_total_time(const Course *course);
 
 double course_best_time_at(const Course *course, size_t index);
 
-Course *course_append(Course *course, const Escale *escale);
+Course *course_append(Course *course, Escale *escale);
 
 Course *course_pop(Course *course);
 

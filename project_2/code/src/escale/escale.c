@@ -19,8 +19,8 @@
 
 struct Escale {
    const char *name;
-   double x;
-   double y;
+   double x; // lon
+   double y; // lat
    double best_time;
 };
 
@@ -38,8 +38,8 @@ static double haversine_distance(
 Escale *escale_create(const char *name, double x, double y) {
    assert(
       name != NULL &&
-      -90 <= x  && x <= 90 &&
-      -180 <= y && y <= 180
+      -180 <= x  && x <= 180 &&
+      -90 <= y && y <= 90
    );
 
    Escale *escale = malloc(sizeof(Escale));
@@ -87,7 +87,7 @@ void escale_set_best_time(Escale *escale, double best_time) {
 double escale_distance(const Escale *e1, const Escale *e2) {
    assert(e1 != NULL && e2 != NULL);
 
-   haversine_distance(e1->x, e1->y, e2->x, e2->y);
+   return haversine_distance(e1->y, e1->x, e2->y, e2->x);
 }
 
 bool escale_equal(const Escale *e1, const Escale *e2) {

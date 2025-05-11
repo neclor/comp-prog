@@ -5,12 +5,15 @@
 \section{Specifications}\label{specifications}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
+\subsection{Constructeur}
+
+
 \[
 \begin{aligned}
 &\text{course\_create}: \text{Escale} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
-&\quad \text{taille course à la création}(C) = 2 \\
+&\quad \text{taille course à la création} = 2 \\
 &\quad \text{première étape de la course} = e_1 \\
 &\quad \text{deuxième  étape de la course} = e_2
 \end{aligned}
@@ -18,68 +21,39 @@
 
 \[
 \begin{aligned}
-&\text{course\_is\_circuit}: \text{Course} \to \mathbb{B} \\
-&\text{pre}: C \neq \text{NULL} \\
+&\text{escale\_create\_array}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
+&\text{pre}: \text{name} \neq \text{NULL} \\
 &\text{post}: \\
-&\text{si } \text{première étape} = \text{dernière étape return: true} \\
-&\text{sinon return:false}
+&\quad \text{escale\_name}(e) = \text{name} \\
+&\quad \text{escale\_x}(e) = x \\
+&\quad \text{escale\_y}(e) = y \\
+&\quad \text{escale\_best\_time}(e) = 0
 \end{aligned}
 \]
-
-
-
 
 \[
 \begin{aligned}
-&\text{course\_get\_escales\_count}: \text{Course} \to \mathbb{N} \\
-&\text{pre}: C \neq \text{NULL} \\
+&\text{escale\_create\_list}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
+&\text{pre}: \text{name} \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{return:} \text{course\_size}
+&\quad \text{escale\_name}(e) = \text{name} \\
+&\quad \text{escale\_x}(e) = x \\
+&\quad \text{escale\_y}(e) = y \\
+&\quad \text{escale\_best\_time}(e) = 0
 \end{aligned}
 \]
 
 
-
-
+\subsection{Transformateur}
 
 \[
 \begin{aligned}
-&\text{course\_get\_stages\_count}: \text{Course} \to \mathbb{N} \\
-&\text{pre}: C \neq \text{NULL} \\
+&\text{escale\_set\_best\_time}: \text{Escale} \times \mathbb{R} \to \text{Void} \\
+&\text{pre}: e \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{result} = \max(0, \text{course\_size}(C) - 1)
+&\quad \text{escale\_best\_time}(e) = \text{best\_time}
 \end{aligned}
 \]
-
-
-
-
-
-\[
-\begin{aligned}
-&\text{course\_total\_time}: \text{Course} \to \mathbb{R} \\
-&\text{pre}: C \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{return:} = \sum_{i=0}^{\text{course\_size}(C)-1} \text{escale\_time}
-\end{aligned}
-\]
-
-
-
-
-
-\[
-\begin{aligned}
-&\text{course\_best\_time}: \text{Course} \times \mathbb{N} \to \mathbb{R} \\
-&\text{pre}: C \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_size}(C) \\
-&\text{post}: \\
-&\quad \text{result} = \text{escale\_time}(\text{course\_at}(C, \text{index}))
-\end{aligned}
-\]
-
-
-
-
 
 \[
 \begin{aligned}
@@ -92,57 +66,30 @@
 \]
 
 
+\subsection{Observateur}
 
 
 
 \[
 \begin{aligned}
-&\text{course\_pop}: \text{Course} \to \text{Course} \\
-&\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
-&\text{post}: \\
-&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1
-\end{aligned}
-\]
-
-
-
-
-\[
-\begin{aligned}
-&\text{course\_free}: \text{Course} \to \text{Void} \\
+&\text{course\_is\_circuit}: \text{Course} \to \mathbb{B} \\
 &\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{course\_size}(C) = 0 \land C = \text{NULL}
+&\text{si } \text{première étape} = \text{dernière étape} \text{return:true} \\
+&\text{sinon return:false}
 \end{aligned}
 \]
-
-
-\[
-\begin{aligned}
-&\text{escale\_create}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
-&\text{pre}: \text{name} \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{escale\_name}(e) = \text{name} \\
-&\quad \text{escale\_x}(e) = x \\
-&\quad \text{escale\_y}(e) = y \\
-&\quad \text{escale\_best\_time}(e) = 0
-\end{aligned}
-\]
-
-
 
 
 
 \[
 \begin{aligned}
-&\text{escale\_get\_name}: \text{Escale} \to \text{String} \\
-&\text{pre}: e \neq \text{NULL} \\
+&\text{course\_best\_time}: \text{Course} \times \mathbb{N} \to \mathbb{R} \\
+&\text{pre}: C \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_size}(C) \\
 &\text{post}: \\
-&\quad \text{result} = \text{escale\_name}(e)
+&\quad \text{result} = \text{escale\_time}(\text{course\_at}(C, \text{index}))
 \end{aligned}
 \]
-
-
 
 
 
@@ -170,34 +117,6 @@
 
 
 
-
-
-\[
-\begin{aligned}
-&\text{escale\_get\_best\_time}: \text{Escale} \to \mathbb{R} \\
-&\text{pre}: e \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{result} = \text{escale\_best\_time}(e)
-\end{aligned}
-\]
-
-
-
-
-
-\[
-\begin{aligned}
-&\text{escale\_set\_best\_time}: \text{Escale} \times \mathbb{R} \to \text{Void} \\
-&\text{pre}: e \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{escale\_best\_time}(e) = \text{best\_time}
-\end{aligned}
-\]
-
-
-
-
-
 \[
 \begin{aligned}
 &\text{escale\_distance}: \text{Escale} \times \text{Escale} \to \mathbb{R} \\
@@ -209,13 +128,3 @@
 
 
 
-
-
-\[
-\begin{aligned}
-&\text{escale\_equal}: \text{Escale} \times \text{Escale} \to \mathbb{B} \\
-&\text{pre}: e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{result} = (\text{escale\_x}(e_1) = \text{escale\_x}(e_2) \land \text{escale\_y}(e_1) = \text{escale\_y}(e_2))
-\end{aligned}
-\]

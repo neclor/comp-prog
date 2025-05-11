@@ -48,31 +48,26 @@ course\_append(course, escale) = $
 
 course\_pop(course) = $
                 \begin{cases}
-                    course = malloc(sizeof(Course)); \\
-                    course->escale = escale; \\
-                    course->next = NULL; \\
-                    return\ course; & \text{if } course->next == NULL \\
+                    free(course->escale); \\
+                    free(course); \\
+                    return\ NULL; & \text{if } course->next == NULL \\
                     \\
-                    course->next = course_append(course->next, escale);\\
+                    course->next = course_pop(course->next);\\
                     return\ course; & \text{otherwise}
                 \end{cases} $
 
-\[
-\text{course\_append}(C, e) =
-\begin{cases}
-    \text{new}(e) & \text{if } C = \text{null} \\
-    C \oplus \{\text{next} \mapsto \text{course\_append}(C.\text{next}, e)\} & \text{else}
-\end{cases}
-\]
+course\_free(course) = $
+                \begin{cases}
+                    return; & \text{if } course->next == NULL \\
+                    \\
+                    course\_free(course->next); \\
+                    free(course->escale); \\
+                    free(course); & \text{otherwise}
+                \end{cases} $
 
-
-
-
-
-
-
-
-
-
-
-
+course\_last(course) = $
+                \begin{cases}
+                    return\ course; & \text{if } course->next == NULL \\
+                    \\
+                    return\[\] course\_last(course->next); & \text{otherwise}
+                \end{cases} $

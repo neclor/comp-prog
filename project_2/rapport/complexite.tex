@@ -5,3 +5,46 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Complexité}\label{complexite}
 %%%%%%%%%%%%%%%%%%%%
+
+\subsection{Fonctions sur Escale}
+
+\begin{itemize}
+    \item escale\_create : $\mathcal{O}(1)$
+    \item escale\_get\_name : $\mathcal{O}(1)$
+    \item escale\_get\_x : $\mathcal{O}(1)$
+    \item escale\_get\_y : $\mathcal{O}(1)$
+    \item escale\_get\_best\_time : $\mathcal{O}(1)$
+    \item escale\_set\_best\_time : $\mathcal{O}(1)$
+    \item escale\_distance : $\mathcal{O}(1)$
+    \item escale\_equal : $\mathcal{O}(1)$
+\end{itemize}
+
+\subsection{Opérations sur Course (tableau dynamique)}
+Soit $n$ le nombre d'escales, $S$ la capacité du tableau.
+
+\begin{align*}
+&\texttt{course\_append} :
+    \begin{cases}
+        \mathcal{O}(1) & \text{(amorti)} \\
+        \mathcal{O}(n) & \text{(réallocation)}
+    \end{cases} \\
+&\texttt{course\_pop} : \mathcal{O}(1) \\
+&\texttt{course\_get\_escales\_count} : \mathcal{O}(1) \\
+&\texttt{course\_total\_time} : \mathcal{O}(n) \\
+&\texttt{course\_best\_time\_at}(i) : \mathcal{O}(1) \\
+&\text{Espace mémoire} : \mathcal{O}(S),\ S \geq n
+\end{align*}
+
+\subsection{Opérations sur \texttt{Course} (liste chaînée)}
+
+Soit $n$ le nombre d'escales.
+
+\begin{align*}
+&\texttt{course\_append} : \mathcal{O}(n) \\
+&\texttt{course\_pop} : \mathcal{O}(n) \\
+&\texttt{course\_get\_escales\_count} : \mathcal{O}(n) \\
+&\texttt{course\_total\_time} : \mathcal{O}(n) \\
+&\texttt{course\_best\_time\_at}(i) : \mathcal{O}(i) \\
+&\texttt{course\_last} : \mathcal{O}(n) \\
+&\text{Espace mémoire} : \mathcal{O}(n)
+\end{align*}

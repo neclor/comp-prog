@@ -8,6 +8,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 À titre d'exemple, voici les spécifications abstraites pour le TAD \texttt{Vector} telles que vues dans le cours théorique (Chapitre 5).  À adapter en fonction de vos besoins pour le projet.
 
+
+
+
 \subsection{TAD Vector}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Syntaxe}
@@ -65,6 +68,10 @@
   \end{center}
 \end{table}
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ESCALE
+
 \subsection{TAD Escale}
 %%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Syntaxe}
@@ -76,8 +83,10 @@
     \end{description}
   \item[Utilise:]
     \begin{description}
+      \item Integer
       \item String (nom)
       \item Float (coordonnées)
+      \item Boolean
     \end{description}
   \item[Opérations:]
     \begin{description}
@@ -86,17 +95,19 @@
       \item escale\_get\_x: Escale $\to$ Float
       \item escale\_get\_y: Escale $\to$ Float
       \item escale\_get\_best\_time: Escale $\to$ Float
-      \item escale\_set\_best\_time: Escale $\times$ Float $\to$ Integer
+      \item escale\_set\_best\_time: Escale $\times$ Float
       \item escale\_distance: Escale $\times$ Escale $\to$ Float
+      \item escale\_equal: Escale $\times$ Escale $\to$ Boolean
     \end{description}
 \end{description}
+
 \subsubsection{Sémantique}
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{description}
   \item[Préconditions:]
     \begin{description}
-      \item $\forall n \in$ String, $\forall x, y \in$ Float
-      \item escale\_create(n, x, y)
+      \item $\forall n \in$ String, $\forall x, y \in$ Float, $\forall e \in$ Escale
+      \item $\forall x, -180 \leq x \leq 180, \forall y, -90 \leq y \leq 90$, escale_create(n, x, y)
       \item $\forall e \in$ Escale, escale\_get\_name(e), escale\_get\_x(e), escale\_get\_y(e), escale\_get\_best\_time(e)
       \item $\forall e \in$ Escale, $\forall t \in$ Float, escale\_set\_best\_time(e, t)
       \item $\forall e1, e2 \in$ Escale, escale\_distance(e1, e2)
@@ -124,6 +135,8 @@
     \end{tabular}
   \end{center}
 \end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Course
 
 \subsection{TAD Course}
 %%%%%%%%%%%%%%%%%%%%%%%%

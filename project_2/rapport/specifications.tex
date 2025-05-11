@@ -40,9 +40,9 @@
 &\text{pre}: \text{name} \neq \text{NULL} \\
 &\text{post}: \\
 &\quad \text{escale\_name}(e) = \text{name} \\
-&\quad \text{escale\_x}(e) = x \\
-&\quad \text{escale\_y}(e) = y \\
-&\quad \text{escale\_best\_time}(e) = 0
+&\quad \text{escale}\rightarrow\text{x} = x \\
+&\quad \text{escale}\rightarrow\text{y}= y \\
+&\quad \text{escale\_get_best\_time}(e) = 0
 \end{aligned}
 \]
 
@@ -54,7 +54,7 @@
 &\text{escale\_set\_best\_time}: \text{Escale} \times \mathbb{R} \to \text{Void} \\
 &\text{pre}: e \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{escale\_best\_time}(e) = \text{best\_time}
+&\quad \text{escale\_get_best\_time}(e) = \text{best\_time}
 \end{aligned}
 \]
 

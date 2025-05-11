@@ -10,15 +10,17 @@
 \section{Invariants}\label{invariants}
 %%%%%%%%%%%%%%%%%%%%
 
+\subsection{Invariant du temps total}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{invariant_time.pdf}
+    \caption{Invariant graphique}
+\end{figure}
+
 \textbf{Invariant formel:} \\
     $escale = escale_0$ \\
     $\land$ \\
     $0 < i < escale\_count$ \\
     $\land$ \\
     $total\_time = \sum_{i=0}^{escale\_count-1} \texttt{get\_time}(escales[i])$
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{invariant.pdf}
-    \caption{Invariant graphique}
-\end{figure}

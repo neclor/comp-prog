@@ -6,69 +6,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Spécifications Abstraites}\label{tad}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-À titre d'exemple, voici les spécifications abstraites pour le TAD \texttt{Vector} telles que vues dans le cours théorique (Chapitre 5).  À adapter en fonction de vos besoins pour le projet.
-
-
-
-
-\subsection{TAD Vector}
-%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Syntaxe}
-%%%%%%%%%%%%%%%%%%%%%%%
-\begin{description}
-  \item[Type:]
-    \begin{description}
-      \item Vector
-    \end{description}
-  \item[Utilise:]
-    \begin{description}
-      \item Integer
-      \item Element
-    \end{description}
-  \item[Opérations:]
-    \begin{description}
-      \item create: Integer $\to$ Vector
-      \item set: Vector $\times$ Integer $\times$ Element $\to$ Vector
-      \item get: Vector $\times$ Integer $\to$ Element
-      \item size: Vector $\to$ Integer
-    \end{description}
-\end{description}
-
-\subsubsection{Sémantique}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{description}
-  \item[Préconditions:]
-    \begin{description}
-      \item $\forall i \in$ Integer, $\forall e \in$ Element, $\forall v\in$ Vector
-      \item $\forall i \geq 0$, create(i)
-      \item $\forall i,  0 \leq i <$ size(v), get(v, i)
-      \item $\forall i, 0 \leq i <$ size(v), set(v, i, e)
-    \end{description}
-  \item[Axiomes:]
-    \begin{description}
-      \item $\forall e \in$ Element, $\forall v \in$ Vector, $\forall i, j \in$ Integer
-      \item size(create(i)) = i
-      \item size(set(v, i, e)) = size(v)
-      \item get(set(v, i, e), j) =
-      $\begin{cases}
-        e         & \textrm{If}~i=j\\
-        \textrm{get}(v, j) & \textrm{Otherwise}
-      \end{cases}$
-    \end{description}
-\end{description}
-
-\begin{table}[!htbp]
-  \begin{center}
-    \begin{tabular}{ll|cc}
-      & & \multicolumn{2}{c}{Opérations Internes}\\
-                                    &               & create($\cdot$) & set($\cdot$)\\
-      \multirow{2}{*}{Observateurs} & get($\cdot$)  & $\emptyset$     & \checkmark\\
-                                    & size($\cdot$) & \checkmark      & \checkmark\\
-    \end{tabular}
-  \end{center}
-\end{table}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ESCALE
 
@@ -107,9 +44,12 @@
   \item[Préconditions:]
     \begin{description}
       \item $\forall n \in$ String, $\forall x, y \in$ Float, $\forall e \in$ Escale
-      \item $\forall x, -180 \leq x \leq 180, \forall y, -90 \leq y \leq 90$, escale_create(n, x, y)
-      \item $\forall e \in$ Escale, escale\_get\_name(e), escale\_get\_x(e), escale\_get\_y(e), escale\_get\_best\_time(e)
-      \item $\forall e \in$ Escale, $\forall t \in$ Float, escale\_set\_best\_time(e, t)
+      \item $\forall x, -180 \leq x \leq 180, \forall y, -90 \leq y \leq 90$, escale\_create(n, x, y)
+      \item escale\_get\_name(e)
+      \item escale\_get\_x(e)
+      \item escale\_get\_y(e)
+      \item escale\_get\_best\_time(e)
+      \item $\forall t \geq 0$ Float, escale\_set\_best\_time(e, t)
       \item $\forall e1, e2 \in$ Escale, escale\_distance(e1, e2)
     \end{description}
   \item[Axiomes:]
@@ -118,8 +58,10 @@
       \item escale\_get\_name(escale\_create(n, x, y)) = n
       \item escale\_get\_x(escale\_create(n, x, y)) = x
       \item escale\_get\_y(escale\_create(n, x, y)) = y
-      \item escale\_get\_best\_time(escale\_set\_best\_time(e, t)) = t
-      \item escale\_distance(e1, e2) = \sqrt{(e1_x - e2_x)^2 + (e1_y - e2_y)^2}
+      \item escale\_get\_best\_time(escale\_create(n, x, y)) = 0
+      \item escale\_distance(escale\_create(n1, x1, y1), escale\_create(n2, x2, y2)) = Haversine formula
+      \item escale\_equal(escale\_create(n1, x, y), escale\_create(n2, x, y)) = true
+      \item escale\_equal(escale\_create(n1, x1, y1), escale\_create(n2, x2, y2)) = false
     \end{description}
 \end{description}
 
@@ -128,10 +70,12 @@
     \begin{tabular}{ll|cc}
       & & \multicolumn{2}{c}{Opérations Internes}\\
                                     &               & escale\_create($\cdot$) & escale\_set\_best\_time($\cdot$)\\
-      \multirow{3}{*}{Observateurs} & escale\_get\_name($\cdot$)  & \checkmark     & $\emptyset$\\
+      \multirow{6}{*}{Observateurs} & escale\_get\_name($\cdot$)  & \checkmark     & $\emptyset$\\
                                     & escale\_get\_x($\cdot$) & \checkmark      & $\emptyset$\\
                                     & escale\_get\_y($\cdot$) & \checkmark      & $\emptyset$\\
-                                    & escale\_get\_best\_time($\cdot$) & \checkmark & \checkmark\\
+                                    & escale\_get\_best\_time($\cdot$) & \checkmark & $\emptyset$\\
+                                    & escale\_distance($\cdot$) & \checkmark & $\emptyset$\\
+                                    & escale\_equal($\cdot$) & \checkmark & $\emptyset$\\
     \end{tabular}
   \end{center}
 \end{table}
@@ -152,6 +96,7 @@
       \item Escale
       \item Integer (index, comptage)
       \item Float (temps total, meilleur temps)
+      \item Boolean
     \end{description}
   \item[Opérations:]
     \begin{description}
@@ -171,32 +116,50 @@
 \begin{description}
   \item[Préconditions:]
     \begin{description}
-      \item $\forall e1, e2 \in$ Escale, course\_create(e1, e2)
-      \item $\forall c \in$ Course, course\_is\_circuit(c), course\_get\_escales\_count(c), course\_get\_stages\_count(c), course\_total\_time(c)
-      \item $\forall c \in$ Course, $\forall i \in$ Integer, course\_best\_time\_at(c, i)
-      \item $\forall c \in$ Course, $\forall e \in$ Escale, course\_append(c, e)
-      \item $\forall c \in$ Course, course\_pop(c)
+      \item $\forall e, e1, e2 \in$ Escale, $\forall n \in$ String, $\forall x, y, t \in$ Float $\forall i \in$ Integer
+      \item $\forall e1, e2 \in$ Escale, escale\_get\_best\_time(e1) = 0 $\land$ escale\_equal(e1, e2) = false, course\_create(e1, e2)
+      \item course\_is\_circuit(c)
+      \item course\_get\_escales\_count(c)
+      \item course\_get\_stages\_count(c)
+      \item course\_total\_time(c)
+      \item $\forall i \in$ Integer, $0 \leq i < $course\_get\_escales\_count(c), course\_best\_time\_at(c, i)
+      \item course\_append(c, e)
+      \item $\forall c \in$ Course, course\_get\_escales\_count(c) $> 0$, course\_pop(c)
     \end{description}
   \item[Axiomes:]
     \begin{description}
-      \item $\forall c \in$ Course, $\forall e1, e2 \in$ Escale, $\forall t \in$ Float
+      \item $\forall c \in$ Course, $\forall e, e1, e2, e3 \in$ Escale, $\forall n \in$ String, $\forall x, y, t \in$ Float $\forall i \in$ Integer
+      \item course\_create(e1, e2) = course\_pop(course\_append(course\_create(e1, e2), e3))
+      \item course\_is\_circuit(course\_create(e1, e2)) = false
+      \item course\_is\_circuit(course\_append(course\_create(e1, e2), e1)) = true
+      \item course\_is\_circuit(course\_append(course\_create(e1, e2), e3)) = false
+      \item course\_is\_circuit(course\_pop(course\_create(e1, e2))) = false
       \item course\_get\_escales\_count(course\_create(e1, e2)) = 2
-      \item course\_is\_circuit(c) = (première escale = dernière escale)
-      \item course\_total\_time(course\_create(e1, e2)) = distance(e1, e2) / meilleur vitesse
-      \item course\_best\_time\_at(c, i) = \textit{temps minimal enregistré pour l'étape i}
+      \item course\_get\_escales\_count(course\_append(c, e)) = course\_get\_escales\_count(c) + 1
+      \item course\_get\_escales\_count(course\_pop(c)) = course\_get\_escales\_count(c) - 1
+      \item course\_get\_stages\_count(course\_create(e1, e2)) = 1
       \item course\_get\_stages\_count(course\_append(c, e)) = course\_get\_stages\_count(c) + 1
+      \item course\_get\_stages\_count(course\_pop(c)) = course\_get\_stages\_count(c) - 1
+      \item course\_get\_stages\_count(course\_pop(course\_pop(course\_create(e1, e2)))) = 0
+      \item course\_total\_time(course\_create(e1, e2)) = escale\_get\_best\_time(e1) + escale\_get\_best\_time(e2)
+      \item course\_total\_time(course\_append(c, e)) = course\_total\_time(c) + escale\_get\_best\_time(e)
+      \item course\_total\_time(course\_pop(course\_append(c, e))) = course\_total\_time(c)
+      \item course\_best\_time\_at(course\_create(e1, e2), 1) = escale\_get\_best\_time(e2)
+      \item course\_best\_time\_at(course\_append(c, e), course\_get\_escales\_count(c)) = escale\_get\_best\_time(e)
+      \item course\_best\_time\_at(course\_pop(course\_create(e1, e2)), 0) = escale\_get\_best\_time(e1)
     \end{description}
 \end{description}
 
 \begin{table}[!htbp]
   \begin{center}
-    \begin{tabular}{ll|cc}
-      & & \multicolumn{2}{c}{Opérations Internes}\\
-                                    &               & course\_create($\cdot$) & course\_append($\cdot$)\\
-      \multirow{3}{*}{Observateurs} & course\_is\_circuit($\cdot$)  & \checkmark     & $\emptyset$\\
-                                    & course\_get\_escales\_count($\cdot$) & \checkmark      & \checkmark\\
-                                    & course\_get\_stages\_count($\cdot$) & \checkmark      & \checkmark\\
-                                    & course\_total\_time($\cdot$) & \checkmark & \checkmark\\
+    \begin{tabular}{ll|ccc}
+      & & \multicolumn{3}{c}{Opérations Internes}\\
+                                    &               & course\_create($\cdot$) & course\_append($\cdot$) & course\_pop($\cdot$)\\
+      \multirow{5}{*}{Observateurs} & course\_is\_circuit($\cdot$)  & \checkmark & \checkmark & \checkmark\\
+                                    & course\_get\_escales\_count($\cdot$) & \checkmark & \checkmark & \checkmark\\
+                                    & course\_get\_stages\_count($\cdot$) & \checkmark & \checkmark & \checkmark\\
+                                    & course\_total\_time($\cdot$) & \checkmark & \checkmark & \checkmark\\
+                                    & course\_best\_time\_at($\cdot$) & \checkmark & \checkmark & \checkmark\\
     \end{tabular}
   \end{center}
 \end{table}

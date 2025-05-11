@@ -9,16 +9,18 @@
 
 Pour implémenter les différents TAD, nous avons choisi deux types de structures de données : le tableau dynamique et la liste chaînée.
 
-\subsection{Tableau Dynamique}
-
-\begin{lstlisting}[caption={Structure de données (tableau)}]
+\subsection{Escale}
+\begin{lstlisting}[caption={Structure de Escale}]
     typedef struct Escale {
         char *name;
         double x;
         double y;
         double time;
     } Escale;
+\end{lstlisting}
 
+\subsection{Course (Tableau)}
+\begin{lstlisting}[caption={Structure de Course (tableau)}]
     typedef struct Course {
         size_t escales_size;
         size_t escales_count;
@@ -39,15 +41,8 @@ Pour implémenter les différents TAD, nous avons choisi deux types de structure
     \item Ajout et suppression au milieu nécessitent un déplacement des éléments ($O(n)$).
 \end{itemize}
 
-\subsection{Liste Chaînée}
-\begin{lstlisting}[caption={Structure de données (liste chainée)}]
-    typedef struct Escale {
-        char *name;
-        double x;
-        double y;
-        double time;
-    } Escale;
-
+\subsection{Course (Liste Chaînée)}
+\begin{lstlisting}[caption={Structure de Course (liste chainée)}]
     typedef struct Course {
         Escale *escale;
         Course *next;
@@ -66,7 +61,10 @@ Pour implémenter les différents TAD, nous avons choisi deux types de structure
     \item Surcharge mémoire due aux pointeurs supplémentaires.
 \end{itemize}
 
-Ces choix de structures de données permettent de répondre aux différentes exigences du problème. Le tableau est idéal pour un accès rapide et indexé, tandis que la liste chaînée convient mieux aux modifications fréquentes et dynamiques de la course.
+Ces choix de structures de données permettent de répondre aux différentes exigences du problème.
+Le tableau est idéal pour un accès rapide et indexé,
+tandis que la liste chaînée convient mieux aux modifications
+fréquentes et dynamiques de la course.
 
 \subsection{Structure de données}
 

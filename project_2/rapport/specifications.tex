@@ -4,3 +4,88 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Specifications}\label{specifications}
 %%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Конструктор Escale}
+\[
+\boxed{
+\begin{aligned}
+&\text{create\_escale}: \mathbb{R} \times \mathbb{R} \times \text{String} \to Escale \\
+&\text{Предусловие}: \true \\
+&\text{Постусловие}: \\
+&\quad \text{escale\_x}(\text{create\_escale}(x, y, n)) = x \\
+&\quad \text{escale\_y}(\text{create\_escale}(x, y, n)) = y \\
+&\quad \text{escale\_name}(\text{create\_escale}(x, y, n)) = n \\
+&\quad \text{escale\_time}(\text{create\_escale}(x, y, n)) = 0
+\end{aligned}
+}
+\]
+
+\subsection*{Конструктор Course (реализация массивом)}
+\[
+\boxed{
+\begin{aligned}
+&\text{course\_create\_array}: Escale \times Escale \to Course \\
+&\text{Предусловие}: e_1 \neq e_2 \\
+&\text{Постусловие}: \\
+&\quad \text{course\_size}(C) = 2 \\
+&\quad \text{course\_is\_circuit}(C) = \false \\
+&\quad \text{course\_at}(C, 0) = e_1 \\
+&\quad \text{course\_at}(C, 1) = e_2 \\
+&\quad \text{course\_time\_at}(C, 0) = 0
+\end{aligned}
+}
+\]
+
+\subsection*{Конструктор Course (реализация списком)}
+\[
+\boxed{
+\begin{aligned}
+&\text{course\_create\_list}: Escale \times Escale \to Course \\
+&\text{Предусловие}: e_1 \neq e_2 \\
+&\text{Постусловие}: \\
+&\quad \text{course\_size}(C) = 2 \\
+&\quad \text{head}(\text{course\_stops}(C)) = e_1 \\
+&\quad \text{tail}(\text{course\_stops}(C)) = e_2 \\
+&\quad \text{course\_time\_at}(C, 0) = 0
+\end{aligned}
+}
+\]
+
+\section*{Спецификации трансформаторов}
+
+\subsection*{Добавление остановки (массив)}
+\[
+\boxed{
+\begin{aligned}
+&\text{course\_append\_array}: Course \times Escale \to Course \\
+&\text{Предусловие}: \text{course\_size}(C) \geq 2 \\
+&\text{Постусловие}: \\
+&\quad \text{course\_size}(C') = \text{course\_size}(C) + 1 \\
+&\quad \text{course\_at}(C', \text{course\_size}(C)) = e
+\end{aligned}
+}
+\]
+
+\subsection*{Удаление остановки (список)}
+\[
+\boxed{
+\begin{aligned}
+&\text{course\_pop\_list}: Course \to Course \\
+&\text{Предусловие}: \text{course\_size}(C) > 2 \\
+&\text{Постусловие}: \\
+&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1 \\
+&\quad \text{tail}(\text{course\_stops}(C')) = \text{tail}^2(\text{course\_stops}(C))
+\end{aligned}
+}
+\]
+
+\section*{Спецификации наблюдателей}
+
+\subsection*{Проверка на цикл}
+\[
+\boxed{
+\text{course\_is\_circuit}: Course \to \mathbb{B} \\
+\text{Постусловие}: \\
+\quad \text{result} = (\text{course\_at}(C, 0) = \text{course\_at}(C, \text{course\_size}(C)-1))
+}
+\]

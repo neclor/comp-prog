@@ -14,8 +14,8 @@
 &\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
 &\quad \text{taille course à la création} = 2 \\
-&\quad \text{première escale de la course} = e_1 \\
-&\quad \text{deuxième  escale de la course} = e_2
+&\quad \text{course}\rightarrow\text{escale} = e1 \\
+&\quad (\text{course}\rightarrow\text{next})\rightarrow\text{escale} = e2 \\
 \end{aligned}
 \]
 
@@ -26,10 +26,9 @@
 &\text{course\_create\_array}: \text{Escale} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
-&\quad \text{course} \neq \text{NULL} \\
-&\quad \text{taille de la course} = 2 \\
-&\quad \text{première escale de la course} = e_1 \\
-&\quad \text{deuxième escale de la course} = e_2 \\
+&\quad \text{escale_count} = 2 \\
+&\quad \text{escales[0]} = e_1 \\
+&\quad \text{escales[1]} = e_2 \\
 \end{aligned}
 \]
 
@@ -39,10 +38,10 @@
 &\text{escale\_create}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
 &\text{pre}: \text{name} \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{escale\_name}(e) = \text{name} \\
+&\quad \text{escale}\rightarrow\text{name} = \text{name} \\
 &\quad \text{escale}\rightarrow\text{x} = x \\
 &\quad \text{escale}\rightarrow\text{y}= y \\
-&\quad \text{escale\_get_best\_time}(e) = 0
+&\quad \text{escale\_get\_best\_time}(e) = 0
 \end{aligned}
 \]
 
@@ -54,7 +53,7 @@
 &\text{escale\_set\_best\_time}: \text{Escale} \times \mathbb{R} \to \text{Void} \\
 &\text{pre}: e \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{escale\_get_best\_time}(e) = \text{best\_time}
+&\quad \text{escale\_get\_best\_time}(e) = \text{best\_time}
 \end{aligned}
 \]
 

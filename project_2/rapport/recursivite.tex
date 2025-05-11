@@ -11,47 +11,59 @@ Définition récursive:
 
 course\_get\_escales\_count(course) = $
                 \begin{cases}
-                    0 & \text{if } ... \\
-                    ... & \text{if } ... \\
-                            ...          \\
-                    ... & \text{otherwise}
+                    return\ 0; & \text{if } course == NULL \\
+                    return\ course\_get\_escales\_count(course->next) + 1; & \text{otherwise}
                 \end{cases} $
 
 
 course\_get\_stages\_count(course) = $
                 \begin{cases}
-                    ... & \text{if } ... \\
-                    ... & \text{if } ... \\
-                            ...          \\
-                    ... & \text{otherwise}
+                    return\ 0; & \text{if } course == NULL \\
+                    return\ 0; & \text{if } course->next == NULL \\
+                    return\ course\_get\_stages\_count(course->next) + 1; & \text{otherwise}
                 \end{cases} $
 
 course\_total\_time(course) = $
                 \begin{cases}
-                    ... & \text{if } ... \\
-                    ... & \text{if } ... \\
-                            ...          \\
-                    ... & \text{otherwise}
+                    return\ 0; & \text{if } course == NULL \\
+                    return\ course\_total\_time(course->next) + escale\_get\_best\_time(course->escale); & \text{otherwise}
                 \end{cases} $
 
 course\_best\_time\_at(course, index) = $
                 \begin{cases}
-                    ... & \text{if } ... \\
-                    ... & \text{if } ... \\
-                            ...          \\
-                    ... & \text{otherwise}
+                    return\ escale\_get\_best\_time(course->escale); & \text{if } index == 0 \\
+                    return\ course\_best\_time\_at(course->next, index - 1); & \text{otherwise}
                 \end{cases} $
-course\_get\_escales\_count(arg1,..., argN) = $
+
+course\_append(course, escale) = $
                 \begin{cases}
-                    ... & \text{if } ... \\
-                    ... & \text{if } ... \\
-                            ...          \\
-                    ... & \text{otherwise}
+                    course = malloc(sizeof(Course)); \\
+                    course->escale = escale; \\
+                    course->next = NULL; \\
+                    return\ course; & \text{if } course == NULL \\
+                    \\
+                    course->next = course_append(course->next, escale);\\
+                    return\ course; & \text{otherwise}
                 \end{cases} $
 
+course\_pop(course) = $
+                \begin{cases}
+                    course = malloc(sizeof(Course)); \\
+                    course->escale = escale; \\
+                    course->next = NULL; \\
+                    return\ course; & \text{if } course->next == NULL \\
+                    \\
+                    course->next = course_append(course->next, escale);\\
+                    return\ course; & \text{otherwise}
+                \end{cases} $
 
-
-
+\[
+\text{course\_append}(C, e) =
+\begin{cases}
+    \text{new}(e) & \text{if } C = \text{null} \\
+    C \oplus \{\text{next} \mapsto \text{course\_append}(C.\text{next}, e)\} & \text{else}
+\end{cases}
+\]
 
 
 

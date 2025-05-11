@@ -10,7 +10,7 @@
 
 \[
 \begin{aligned}
-&\text{course\_create}: \text{Escale} \times \text{Escale} \to \text{Course} \\
+&\text{course\_create_list}: \text{Escale} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
 &\quad \text{taille course à la création} = 2 \\
@@ -19,21 +19,24 @@
 \end{aligned}
 \]
 
-\[
-\begin{aligned}
-&\text{escale\_create\_array}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
-&\text{pre}: \text{name} \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{escale\_name}(e) = \text{name} \\
-&\quad \text{escale\_x}(e) = x \\
-&\quad \text{escale\_y}(e) = y \\
-&\quad \text{escale\_best\_time}(e) = 0
-\end{aligned}
-\]
+
 
 \[
 \begin{aligned}
-&\text{escale\_create\_list}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
+&\text{course\_create_array}: \text{Escale} \times \text{Escale} \to \text{Course} \\
+&\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
+&\text{post}: \\
+&\quad \text{course} \neq \text{NULL} \\
+&\quad \text{course\_size}(C) = 2 \\
+&\quad \text{course\_first}(C) = e_1 \\
+&\quad \text{course\_second}(C) = e_2 \\
+\end{aligned}
+\]
+
+
+\[
+\begin{aligned}
+&\text{escale\_create}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
 &\text{pre}: \text{name} \neq \text{NULL} \\
 &\text{post}: \\
 &\quad \text{escale\_name}(e) = \text{name} \\

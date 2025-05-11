@@ -5,76 +5,224 @@
 \section{Specifications}\label{specifications}
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-\boxed{
+\[
 \begin{aligned}
-&\text{create\_escale}: \mathbb{R} \times \mathbb{R} \times \text{String} \to Escale \\
-&\text{pre}: \\
-&\text{post}: \\
-&\quad \text{escale\_x}(e) = x \\
-&\quad \text{escale\_y}(e) = y \\
-&\quad \text{escale\_name}(e) = n \\
-&\quad \text{escale\_time}(e) = 0
-\end{aligned}
-}
-
-\boxed{
-\begin{aligned}
-&\text{course\_create\_array}: Escale \times Escale \to Course \\
-&\text{pre}: e_1 \neq e_2 \\
+&\text{course\_create}: \text{Escale} \times \text{Escale} \to \text{Course} \\
+&\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
 &\quad \text{course\_size}(C) = 2 \\
-&\quad \text{course\_is\_circuit}(C) = \text{false} \\
 &\quad \text{course\_at}(C, 0) = e_1 \\
-&\quad \text{course\_at}(C, 1) = e_2 \\
-&\quad \text{course\_time\_at}(C, 0) = 0
+&\quad \text{course\_at}(C, 1) = e_2
 \end{aligned}
-}
+\]
 
-\boxed{
+
+
+
+
+\[
 \begin{aligned}
-&\text{course\_create\_list}: Escale \times Escale \to Course \\
-&\text{pre}: e_1 \neq e_2 \\
+&\text{course\_is\_circuit}: \text{Course} \to \mathbb{B} \\
+&\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{course\_size}(C) = 2 \\
-&\quad \text{course\_head}(C) = e_1 \\
-&\quad \text{course\_tail}(C) = e_2 \\
-&\quad \text{course\_time\_at}(C, 0) = 0
+&\quad \text{result} = (\text{course\_at}(C, 0) = \text{course\_at}(C, \text{course\_size}(C)-1))
 \end{aligned}
-}
+\]
 
-\boxed{
+
+
+
+
+\[
 \begin{aligned}
-&\text{course\_append}: \Course \times \Escale \to \Course \\
-&\text{pre}: \text{course\_size}(C) \geq 2 \\
+&\text{course\_get\_escales\_count}: \text{Course} \to \mathbb{N} \\
+&\text{pre}: C \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \text{course\_size}(C)
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{course\_get\_stages\_count}: \text{Course} \to \mathbb{N} \\
+&\text{pre}: C \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \max(0, \text{course\_size}(C) - 1)
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{course\_total\_time}: \text{Course} \to \mathbb{R} \\
+&\text{pre}: C \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \sum_{i=0}^{\text{course\_size}(C)-1} \text{escale\_time}(\text{course\_at}(C, i))
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{course\_best\_time\_at}: \text{Course} \times \mathbb{N} \to \mathbb{R} \\
+&\text{pre}: C \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_size}(C) \\
+&\text{post}: \\
+&\quad \text{result} = \text{escale\_time}(\text{course\_at}(C, \text{index}))
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{course\_append}: \text{Course} \times \text{Escale} \to \text{Course} \\
+&\text{pre}: C \neq \text{NULL} \land e \neq \text{NULL} \\
 &\text{post}: \\
 &\quad \text{course\_size}(C') = \text{course\_size}(C) + 1 \\
 &\quad \text{course\_at}(C', \text{course\_size}(C)) = e \\
 &\quad \forall i \in [0, \text{course\_size}(C)-1], \text{course\_at}(C', i) = \text{course\_at}(C, i)
 \end{aligned}
-}
+\]
 
-\boxed{
+
+
+
+
+\[
 \begin{aligned}
-&\text{course\_pop}: \Course \to \Course \\
-&\text{pre}: \text{course\_size}(C) > 2 \\
+&\text{course\_pop}: \text{Course} \to \text{Course} \\
+&\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
 &\text{post}: \\
 &\quad \text{course\_size}(C') = \text{course\_size}(C) - 1 \\
 &\quad \forall i \in [0, \text{course\_size}(C')-1], \text{course\_at}(C', i) = \text{course\_at}(C, i)
 \end{aligned}
-}
+\]
 
-\boxed{
-\begin{aligned}
-&\text{course\_is\_circuit}: \Course \to \mathbb{B} \\
-&\text{post}: \\
-&\quad \text{result} = (\text{course\_at}(C, 0) = \text{course\_at}(C, \text{course\_size}(C)-1))
-\end{aligned}
-}
 
-\boxed{
+
+
+
+\[
 \begin{aligned}
-&\text{course\_total\_time}: \Course \to \mathbb{R} \\
+&\text{course\_free}: \text{Course} \to \text{Void} \\
+&\text{pre}: C \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{result} = \sum_{i=0}^{\text{course\_size}(C)-1} \text{escale\_time}(\text{course\_at}(C, i))
+&\quad \text{course\_size}(C) = 0 \land C = \text{NULL}
 \end{aligned}
-}
+\]
+
+
+\[
+\begin{aligned}
+&\text{escale\_create}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
+&\text{pre}: \text{name} \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{escale\_name}(e) = \text{name} \\
+&\quad \text{escale\_x}(e) = x \\
+&\quad \text{escale\_y}(e) = y \\
+&\quad \text{escale\_best\_time}(e) = 0
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_get\_name}: \text{Escale} \to \text{String} \\
+&\text{pre}: e \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \text{escale\_name}(e)
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_get\_x}: \text{Escale} \to \mathbb{R} \\
+&\text{pre}: e \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \text{escale\_x}(e)
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_get\_y}: \text{Escale} \to \mathbb{R} \\
+&\text{pre}: e \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \text{escale\_y}(e)
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_get\_best\_time}: \text{Escale} \to \mathbb{R} \\
+&\text{pre}: e \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \text{escale\_best\_time}(e)
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_set\_best\_time}: \text{Escale} \times \mathbb{R} \to \text{Void} \\
+&\text{pre}: e \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{escale\_best\_time}(e) = \text{best\_time}
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_distance}: \text{Escale} \times \text{Escale} \to \mathbb{R} \\
+&\text{pre}: e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = \sqrt{(\text{escale\_x}(e_2) - \text{escale\_x}(e_1))^2 + (\text{escale\_y}(e_2) - \text{escale\_y}(e_1))^2}
+\end{aligned}
+\]
+
+
+
+
+
+\[
+\begin{aligned}
+&\text{escale\_equal}: \text{Escale} \times \text{Escale} \to \mathbb{B} \\
+&\text{pre}: e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{result} = (\text{escale\_x}(e_1) = \text{escale\_x}(e_2) \land \text{escale\_y}(e_1) = \text{escale\_y}(e_2))
+\end{aligned}
+\]

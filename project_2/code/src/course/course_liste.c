@@ -20,6 +20,8 @@ struct Course {
 
 /* ======= Private Function Prototypes ======= */
 
+static Course *course_last(const Course *course);
+
 /* ======= Public Functions ======= */
 
 Course *course_create(Escale *e1, Escale *e2) {
@@ -46,12 +48,12 @@ Course *course_create(Escale *e1, Escale *e2) {
 bool course_is_circuit(const Course *course) {
    assert(course != NULL);
 
-   if (course->escales_count < 2)
+   if (course->next == NULL)
       return false;
 
    return escale_equal(
-      course->escales[0],
-      course->escales[course->escales_count - 1]
+      course->escale,
+      course_last(course)->escale
    );
 }
 
@@ -85,9 +87,12 @@ double course_total_time(const Course *course) {
 }
 
 double course_best_time_at(const Course *course, size_t index) {
-   assert(course != NULL && index < course->escales_count);
+   assert(course != NULL && index < course_get_escales_count(course));
 
-   return escale_get_best_time(course->escales[index]);
+   if (index == 0)
+      return escale_get_best_time(course->escale);
+
+   return course_best_time_at(course->next, index - 1);
 }
 
 Course *course_append(Course *course, const Escale *escale) {
@@ -130,3 +135,11 @@ void course_free(Course *course) {
 
 /* ======= Private Functions ======= */
 
+static Course *course_last(const Course *course) {
+   assert(course != NULL);
+
+   if (course->next == NULL)
+      return course;
+
+   return course_last(course->next);
+}

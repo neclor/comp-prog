@@ -26,7 +26,7 @@
 &\text{course\_create\_array}: \text{Escale} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: e_1 \neq e_2 \land e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \land \text{escale\_time}(e_1) = 0 \\
 &\text{post}: \\
-&\quad \text{escale_count} = 2 \\
+&\quad \text{escale\_count} = 2 \\
 &\quad \text{escales[0]} = e_1 \\
 &\quad \text{escales[1]} = e_2 \\
 \end{aligned}
@@ -35,7 +35,7 @@
 
 \[
 \begin{aligned}
-&\text{escale\_create}: \text{String} \times \mathbb{R} \times \mathbb{R} \to \text{Escale} \\
+&\text{escale\_create}: \text{String} \times \text{Float} \times \text{Float} \to \text{Escale} \\
 &\text{pre}: \text{name} \neq \text{NULL} \\
 &\text{post}: \\
 &\quad \text{escale}\rightarrow\text{name} = \text{name} \\
@@ -51,33 +51,33 @@
 \[
 \begin{aligned}
 &\text{course\_pop\_list}: \text{Course} \to \text{Course} \\
-&\text{pre}: C \neq \text{NULL} \\
+&\text{pre}: course \neq \text{NULL} \land \text{course\_escale\_count(course)} > 0\\
 &\text{post}: \\
-&\quad \text{Si } \text{course\_size}(C) = 1, \text{alors } C' = \text{NULL} \text{ et la mémoire est libérée} \\
-&\quad \text{Sinon, } \text{course\_size}(C') = \text{course\_size}(C) - 1 \\
+&\quad \text{Si course\_escale\_count(course)} = 1, \text{alors } \text{return NULL} \text{ et la mémoire est libérée} \\
+&\quad \text{Sinon, } \text{supprimer le dernier escale et libérée} \\
 \end{aligned}
 \]
 
 \[
 \begin{aligned}
 &\text{course\_pop\_array}: \text{Course} \to \text{Course} \\
-&\text{pre}: C \neq \text{NULL} \land \text{course\_size}(C) > 0 \\
+&\text{pre}: course \neq \text{NULL} \land \text{course\_escale\_count(course)} > 0 \\
 &\text{post}: \\
-&\quad \text{La dernière escale de C est supprimée et libérée} \\
-&\quad \text{course\_size}(C') = \text{course\_size}(C) - 1
+&\quad \text{supprimer le dernier escale (escales[escales\_count - 1]) et libérée} \\
+&\quad \text{escales\_count} = \text{escales\_count} - 1 \\
 \end{aligned}
 \]
-
 
 
 \[
 \begin{aligned}
 &\text{course\_append\_array}: \text{Course} \times \text{Escale} \to \text{Course} \\
-&\text{pre}: C \neq \text{NULL} \land e \neq \text{NULL} \\
+&\text{pre}: course \neq \text{NULL} \land e \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{Si } \text{course\_size}(C) = \text{course\_capacity}(C), \text{alors } C \text{ est réalloué dynamiquement} \\
-&\quad \text{course\_size}(C') = \text{course\_size}(C) + 1 \\
-&\quad \text{course\_last}(C') = e
+&\quad \text{Si } \text{escales\_size} == \text{escales\_count}, \text{alors escales est réalloué dynamiquement et} \\
+&\quad \text{escales\_size} = \text{escales\_size} * 2 \\
+&\quad \text{escales[escales\_count]} = e \\
+&\quad \text{escales\_count} = \text{escales\_count} + 1
 \end{aligned}
 \]
 
@@ -87,9 +87,8 @@
 &\text{course\_append\_list}: \text{Course} \times \text{Escale} \to \text{Course} \\
 &\text{pre}: e \neq \text{NULL} \\
 &\text{post}: \\
-&\quad \text{Si } C = \text{NULL}, \text{alors une nouvelle course est créée et contient e} \\
+&\quad \text{Si } course = \text{NULL}, \text{alors une nouvelle course est créée et contient e} \\
 &\quad \text{Sinon, e est ajoutée à la fin de la liste chaînée} \\
-&\quad \text{course\_size}(C') = \text{course\_size}(C) + 1
 \end{aligned}
 \]
 
@@ -99,11 +98,11 @@
 
 \[
 \begin{aligned}
-&\text{course\_is\_circuit}: \text{Course} \to \mathbb{B} \\
-&\text{pre}: C \neq \text{NULL} \\
+&\text{course\_is\_circuit}: \text{Course} \to \text{Boolean} \\
+&\text{pre}: course \neq \text{NULL} \\
 &\text{post}: \\
-&\text{si } \text{première étape} = \text{dernière étape} \text{return:true} \\
-&\text{sinon return:false}
+&\quad \text{si } \text{première étape} == \text{dernière étape return: true} \\
+&\quad \text{sinon return: false}
 \end{aligned}
 \]
 
@@ -111,10 +110,40 @@
 
 \[
 \begin{aligned}
-&\text{course\_best\_time}: \text{Course} \times \mathbb{N} \to \mathbb{R} \\
-&\text{pre}: C \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_size}(C) \\
+&\text{course\_best\_time\_at\_array}: \text{Course} \times \text{Integer} \to \text{Float} \\
+&\text{pre}: course \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_escale\_count(course)} \\
 &\text{post}: \\
-&\quad \text{result} = \text{escale\_time}(\text{course\_at}(C, \text{index}))
+&\quad \text{return: escale\_get\_best\_time(escales[index])}
+\end{aligned}
+\]
+
+\[
+\begin{aligned}
+&\text{course\_best\_time\_at\_list}: \text{Course} \times \text{Integer} \to \text{Float} \\
+&\text{pre}: course \neq \text{NULL} \land 0 \leq \text{index} < \text{course\_escale\_count(course)} \\
+&\text{post}: \\
+&\quad \text{on cherche un escal, de manière récursive}\\
+&\quad \text{return: escale\_get\_best\_time(escale)}
+\end{aligned}
+\]
+
+
+\[
+\begin{aligned}
+&\text{escale\_get\_x}: \text{Escale} \to \text{Float} \\
+&\text{pre}: escale \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{return: escale} \rightarrow x
+\end{aligned}
+\]
+
+
+\[
+\begin{aligned}
+&\text{escale\_get\_y}: \text{Escale} \to \text{Float} \\
+&\text{pre}: escale \neq \text{NULL} \\
+&\text{post}: \\
+&\quad \text{return: escale}\rightarrow y
 \end{aligned}
 \]
 
@@ -122,31 +151,7 @@
 
 \[
 \begin{aligned}
-&\text{escale\_get\_x}: \text{Escale} \to \mathbb{R} \\
-&\text{pre}: e \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{result} = \text{escale\_x}(e)
-\end{aligned}
-\]
-
-
-
-
-
-\[
-\begin{aligned}
-&\text{escale\_get\_y}: \text{Escale} \to \mathbb{R} \\
-&\text{pre}: e \neq \text{NULL} \\
-&\text{post}: \\
-&\quad \text{result} = \text{escale\_y}(e)
-\end{aligned}
-\]
-
-
-
-\[
-\begin{aligned}
-&\text{escale\_distance}: \text{Escale} \times \text{Escale} \to \mathbb{R} \\
+&\text{escale\_distance}: \text{Escale} \times \text{Escale} \to \text{Float} \\
 &\text{pre}: e_1 \neq \text{NULL} \land e_2 \neq \text{NULL} \\
 &\text{post}: \\
 &d = 2R \arcsin \left( \sqrt{\sin^2 \left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1) \cos(\phi_2) \sin^2 \left(\frac{\Delta \lambda}{2}\right)} \right)
